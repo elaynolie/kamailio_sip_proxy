@@ -28,7 +28,7 @@ def get_last_include(cfg_path):
 
 def make_backup(src_file, backup_dir):
     if not os.path.isfile(src_file):
-        logging.error(f"Не найден файл: {src_file}")
+        logging.error(f"No found file: {src_file}")
         return False
 
     os.makedirs(backup_dir, exist_ok=True)
@@ -39,16 +39,16 @@ def make_backup(src_file, backup_dir):
 
     try:
         shutil.copy2(src_file, dst)
-        logging.info(f"Скопирован {src_file} → {dst}")
+        logging.info(f"Coped {src_file} → {dst}")
         return True
     except Exception as e:
-        logging.error(f"Ошибка копирования {src_file} → {dst}: {e}")
+        logging.error(f"Copy error {src_file} → {dst}: {e}")
         return False
 
 def main():
     last = get_last_include(KAMAILIO_CFG)
     if not last:
-        logging.error("Не найден include_file с .cfg")
+        logging.error("Not found include_file с .cfg")
         return
     src = os.path.join(BASE_DIR, last)
     make_backup(src, BACKUP_DIR)
